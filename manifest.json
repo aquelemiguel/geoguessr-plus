@@ -1,0 +1,25 @@
+{
+    "name": "Geoguessr Plus",
+    "description": "Enhance the Geoguessr experience!",
+    "version": "1.0",
+    "manifest_version": 3,
+    "icons": {
+        "16": "icons/favicon_128.png",
+        "32": "icons/favicon_128.png",
+        "48": "icons/favicon_128.png",
+        "128": "icons/favicon_128.png"
+    },
+    "background": {
+        "service_worker": "app.js"
+    },
+    "permissions": [
+        "webNavigation", "scripting"
+    ],
+    "host_permissions": [
+        "*://*.geoguessr.com/*"
+    ],
+    "web_accessible_resources": [{
+        "resources": ["/icons/*.svg"],
+        "matches": ["*://*.geoguessr.com/*"]
+    }]
+}
