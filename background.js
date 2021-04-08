@@ -1,6 +1,4 @@
 chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
-    console.log(details.url);
-
     if (details.url.includes('/me/current')) {
         chrome.scripting.executeScript({
             target: { tabId: details.tabId },
@@ -12,6 +10,11 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
         chrome.scripting.executeScript({
             target: { tabId: details.tabId },
             files: ['scripts/show-rules.js']
+        });
+
+        chrome.scripting.executeScript({
+            target: { tabId: details.tabId },
+            files: ['scripts/more-round-info.js']
         });
     }
 });

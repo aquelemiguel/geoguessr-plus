@@ -1,0 +1,74 @@
+(async function() {
+    const URL_BASE = `https://www.geoguessr.com/api/v3`;
+    const game_id = window.location.href.split('/').pop();
+
+    const response = await fetch(`${URL_BASE}/games/${game_id}`);
+    const game_info = await response.json();
+
+    function parse_round_info(guess) {
+        let score = parseInt(guess.roundScore.amount).toLocaleString('en-US');
+        let distance = guess.distance.meters.amount;
+
+        let round_seconds_date = new Date(0);
+        round_seconds_date.setSeconds(guess.time);
+        let time = round_seconds_date.toISOString().substr(14, 5);
+
+        return { score, distance, time };
+    }
+
+    const layout_elem = document.querySelector('div.game-layout__status');
+    // layout_elem.style = `display: flex; align-items: center;`;
+
+    /**
+     * Listen for game score change and request the game state
+     */
+    let observer = new MutationObserver(async _mutations => {
+        const response = await fetch(`${URL_BASE}/games/${game_id}`);
+        const game_info = await response.json();
+
+        const guess = parse_round_info(game_info.player.guesses[game_info.round - 2]);
+        console.log(game_info.round - 2);
+        const round_elem = document.querySelector(`div#round${game_info.round - 1}-details`);
+        console.log(`div#round${game_info.round - 1}-details`);
+
+        round_elem.children[1].innerHTML = guess.score;
+        round_elem.children[2].innerHTML = `${guess.distance} | ${guess.time}`
+    });
+
+    observer.observe(document.querySelector('div.game-statuses > div:last-child'), {
+        subtree: true,
+        characterData: true,
+    });
+
+    const statuses_elem = document.createElement('div');
+    statuses_elem.innerHTML = `
+        <div class="game-statuses" id="advanced-round-statuses" 
+            style="display: flex; margin-top: 1rem;"
+        >
+        </div>`.trim();
+
+    for (let i = 1; i <= 4; i++) {
+        const round_info = document.createElement('div');
+
+        const guess_dict = game_info.player.guesses[i-1];
+        const guess = guess_dict ? parse_round_info(guess_dict) : undefined;
+
+        round_info.innerHTML = `
+            <div class="game-status" id="round${i}-details" data-qa="score"
+                style="flex: 1; white-space: nowrap;">
+                <div class="game-status__heading">
+                    R${i}
+                </div>
+                <div class="game-status__body score-label">
+                    ${guess ? guess.score : '-'}
+                </div>
+                <div class="extra-label" style="font-size: 8px;">
+                    ${guess ? `${guess.distance} | ${guess.time}` : 'N/A'}
+                </div>
+            </div>
+        `.trim();
+
+        statuses_elem.firstChild.appendChild(round_info.firstChild);
+    }
+    layout_elem.appendChild(statuses_elem.firstChild);
+})();
