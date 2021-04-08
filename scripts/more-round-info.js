@@ -2,12 +2,18 @@
     const URL_BASE = `https://www.geoguessr.com/api/v3`;
     const game_id = window.location.href.split('/').pop();
 
-    const response = await fetch(`${URL_BASE}/games/${game_id}`);
+    let response = await fetch(`${URL_BASE}/games/${game_id}`);
     const game_info = await response.json();
+
+    response = await fetch(`https://www.geoguessr.com/api/v3/profiles/`);
+    const profile_info = await response.json();
 
     function parse_round_info(guess) {
         let score = parseInt(guess.roundScore.amount).toLocaleString('en-US');
-        let distance = guess.distance.meters.amount;
+
+        let distance = profile_info.distanceUnit === 0 ?
+            `${guess.distance.meters.amount} km` :
+            `${guess.distance.miles.amount} mi`
 
         let round_seconds_date = new Date(0);
         round_seconds_date.setSeconds(guess.time);
@@ -17,10 +23,17 @@
     }
 
     const layout_elem = document.querySelector('div.game-layout__status');
-    // layout_elem.style = `display: flex; align-items: center;`;
+    
+    /**
+     * Style default game statuses.
+     */
+    layout_elem.firstElementChild.style = `display: flex; white-space: nowrap;`;
+    document.querySelectorAll('div.game-status').forEach(status => {
+        status.style = `flex: 1;`;
+    });
 
     /**
-     * Listen for game score change and request the game state
+     * Listen for game score change and request the game state.
      */
     let observer = new MutationObserver(async _mutations => {
         const response = await fetch(`${URL_BASE}/games/${game_id}`);
