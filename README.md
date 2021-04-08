@@ -3,10 +3,10 @@
 **Geoguessr Plus** is a sleek Chrome extension that enhances your Geoguessr experience.
 
 ## Installation
-1. Download this repo as a ZIP and unzip it somewhere.
+1. [Download this repo](https://github.com/aquelemiguel/geoguessr-plus/archive/refs/heads/main.zip) and unzip it somewhere.
 2. Navigate to **chrome://extensions**.
-3. On the top right, toggle the switch to **enable Developer mode**.
-4. Click **Load unpacked** and select the extension's directory.
+3. On the top right, toggle **Developer mode**.
+4. Click **Load unpacked** and select the extension's root directory.
 
 ## Features
 Please note that this extension is **not focused on assisting players to gain a competitive edge** but rather improve the Geoguessr interface with optional features.
