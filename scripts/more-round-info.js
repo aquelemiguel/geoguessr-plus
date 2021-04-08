@@ -5,6 +5,13 @@
     let response = await fetch(`${URL_BASE}/games/${game_id}`);
     const game_info = await response.json();
 
+    /**
+     * Right now, don't inject this into streak games.
+     */
+    if (game_info.mode !== 'standard') {
+        return;
+    }
+
     response = await fetch(`https://www.geoguessr.com/api/v3/profiles/`);
     const profile_info = await response.json();
 
@@ -12,12 +19,12 @@
         let score = parseInt(guess.roundScore.amount).toLocaleString('en-US');
 
         let distance = profile_info.distanceUnit === 0 ?
-            `${guess.distance.meters.amount} km` :
-            `${guess.distance.miles.amount} mi`
+            `${guess.distance.meters.amount} ${guess.distance.meters.unit}` :
+            `${guess.distance.miles.amount} ${guess.distance.miles.unit}`
 
         let round_seconds_date = new Date(0);
         round_seconds_date.setSeconds(guess.time);
-        let time = round_seconds_date.toISOString().substr(14, 5);
+        let time = round_seconds_date.toISOString().substr(11, 8);
 
         return { score, distance, time };
     }
@@ -40,9 +47,7 @@
         const game_info = await response.json();
 
         const guess = parse_round_info(game_info.player.guesses[game_info.round - 2]);
-        console.log(game_info.round - 2);
         const round_elem = document.querySelector(`div#round${game_info.round - 1}-details`);
-        console.log(`div#round${game_info.round - 1}-details`);
 
         round_elem.children[1].innerHTML = guess.score;
         round_elem.children[2].innerHTML = `${guess.distance} | ${guess.time}`
@@ -70,13 +75,13 @@
             <div class="game-status" id="round${i}-details" data-qa="score"
                 style="flex: 1; white-space: nowrap;">
                 <div class="game-status__heading">
-                    R${i}
+                    Round ${i}
                 </div>
                 <div class="game-status__body score-label">
                     ${guess ? guess.score : '-'}
                 </div>
                 <div class="extra-label" style="font-size: 8px;">
-                    ${guess ? `${guess.distance} | ${guess.time}` : 'N/A'}
+                    ${guess ? `${guess.distance} | ${guess.time}h` : 'TBD'}
                 </div>
             </div>
         `.trim();
