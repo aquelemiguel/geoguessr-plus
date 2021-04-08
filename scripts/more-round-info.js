@@ -22,9 +22,16 @@
             `${guess.distance.meters.amount} ${guess.distance.meters.unit}` :
             `${guess.distance.miles.amount} ${guess.distance.miles.unit}`
 
-        let round_seconds_date = new Date(0);
+        let round_seconds_date = new Date(0), time;
         round_seconds_date.setSeconds(guess.time);
-        let time = round_seconds_date.toISOString().substr(11, 8);
+
+        if (guess.time < 60) {
+            time = `${guess.time}s`;
+        } else if (guess.time >= 60 && guess.time < 3600) {
+            time = `${round_seconds_date.toISOString().substr(14, 5)}m`; 
+        } else {
+            time = `${round_seconds_date.toISOString().substr(11, 8)}h`;
+        }
 
         return { score, distance, time };
     }
@@ -81,7 +88,7 @@
                     ${guess ? guess.score : '-'}
                 </div>
                 <div class="extra-label" style="font-size: 8px;">
-                    ${guess ? `${guess.distance} | ${guess.time}h` : 'TBD'}
+                    ${guess ? `${guess.distance} | ${guess.time}` : 'TBD'}
                 </div>
             </div>
         `.trim();
