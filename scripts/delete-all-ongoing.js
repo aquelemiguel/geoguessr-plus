@@ -55,7 +55,7 @@
         const main_container = document.getElementById('__next')
         main_container.appendChild(confirm_dlg_elem);
 
-        let response = await fetch(`${URL_BASE}?offset=&limit=2`);
+        let response = await fetch(`${URL_BASE}?offset=&limit=10000`);
         let ongoing = await response.json();
 
         // Update dialog text with ongoing games count

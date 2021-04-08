@@ -11,7 +11,7 @@
     rules_tab_elem.innerHTML = `
         <div class="game-status">
             <div class="game-status__heading">Rules</div>
-            <div class="game-status__body">
+            <div class="game-status__body" style="margin-top: 0.125rem;">
                 <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 24 24" width="16px"
                     fill="${game_info.forbidMoving ? '#c21b1b' : '#bfbfbf'}">
                     <path d="M0 0h24v24H0V0z" fill="none"/>

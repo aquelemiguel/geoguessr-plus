@@ -16,5 +16,10 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
             target: { tabId: details.tabId },
             files: ['scripts/more-round-info.js']
         });
+
+        chrome.scripting.executeScript({
+            target: { tabId: details.tabId },
+            files: ['scripts/streak-show-flags.js']
+        });
     }
 });
