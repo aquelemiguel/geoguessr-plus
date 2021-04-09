@@ -3,6 +3,9 @@
     "description": "Enhance the Geoguessr experience!",
     "version": "1.0",
     "manifest_version": 3,
+    "action": {
+        "default_popup": "index.html"
+    },
     "icons": {
         "16": "icons/favicon_128.png",
         "32": "icons/favicon_128.png",
