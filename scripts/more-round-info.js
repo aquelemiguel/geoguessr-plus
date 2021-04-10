@@ -41,7 +41,7 @@
     /**
      * Style default game statuses.
      */
-    layout_elem.firstElementChild.style = `display: flex; white-space: nowrap;`;
+    layout_elem.firstElementChild.style = `display: flex; white-space: nowrap; border-bottom-left-radius: 0; border-bottom-right-radius: 0;`;
     document.querySelectorAll('div.game-status').forEach(status => {
         status.style = `flex: 1;`;
     });
@@ -68,7 +68,7 @@
     const statuses_elem = document.createElement('div');
     statuses_elem.innerHTML = `
         <div class="game-statuses" id="advanced-round-statuses" 
-            style="display: flex; margin-top: 1rem;"
+            style="display: flex; border-top-left-radius: 0; border-top-right-radius: 0;"
         >
         </div>`.trim();
 

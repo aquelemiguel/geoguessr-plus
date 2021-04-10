@@ -1,0 +1,17 @@
+:root {
+    --logo-red: #cc312e;
+    --dark-grey: rgb(40, 40, 40, 80%);
+}
+
+.game-statuses {
+    /* background-color: #282828 !important; */
+    background-color: var(--dark-grey) !important;
+}
+
+.game-status__heading {
+    color: var(--logo-red) !important;
+}
+
+.game-status__body, .extra-label {
+    color: white !important;
+}

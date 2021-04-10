@@ -1,4 +1,9 @@
 chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
+    // chrome.scripting.insertCSS({
+    //     target: { tabId: details.tabId },
+    //     files: ['styles/themes.css']
+    // });
+
     if (details.url.includes('/me/current')) {
         chrome.scripting.executeScript({
             target: { tabId: details.tabId },
