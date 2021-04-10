@@ -7,10 +7,11 @@
      * Ensure this isn't running on US state streak mode.
      * Support coming soon!
      */
-    if (game.mode === 'standard' || game.map === 'us-state-streak') {
+    if (game.mode === 'standard') {
         return;
     }
 
+    const is_country_streak = game.map === 'country-streak';
     const canvas_elem = document.querySelector('div.game-layout__canvas');
     
     function create_flag(country_code) {
@@ -18,8 +19,9 @@
         
         flag_elem.innerHTML = `
             <div class="streak-result-list__flag-circle" 
-                style="margin: 0; margin-right: 0.5em; width: 1rem; height: 1rem; box-shadow: 1px 2px 5px lightgrey;">
-                <img src="/static/flags/${country_code.toUpperCase()}.svg">
+                style="margin: 0; margin-right: 0.5em; width: 1.25rem; height: 1.25rem; box-shadow: 1px 2px 5px lightgrey;">
+                <img src="/static/${is_country_streak ? 'flags' : 'us-states'}/${country_code.toUpperCase()}.svg"
+                    ${!is_country_streak ? 'class="us-state" style="padding: 0.1rem;"': ''}>
             </div>
         `.trim();
 
