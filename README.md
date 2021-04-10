@@ -14,11 +14,12 @@ Please note that this extension is **not focused on assisting players to gain a 
 ### ⏳ Track advanced round info (score, distance, time spent)
 <img src="https://i.imgur.com/q5qwFRA.png" width="600px">
 
-### 🚨 See movement settings
+### 🚨 See enabled movement rules
 <img src="https://i.imgur.com/MD6Lv0B.png" width="600px">
 
-### 🚩 See previous streak guesses
+### 🚩 See previous country and US state streak guesses
 <img src="https://i.imgur.com/nnfewsv.png" width="600px">
+<img src="https://i.imgur.com/f1aiC5A.png" width="600px">
 
-### 🗑 Delete all ongoing games
+### 🗑 Delete all ongoing games at once
 <img src="https://i.imgur.com/xXsteXW.png" width="600px">
