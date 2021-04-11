@@ -3,10 +3,6 @@
     const response = await fetch(`https://www.geoguessr.com/api/v3/games/${game_id}`);
     const game = await response.json();
 
-    /**
-     * Ensure this isn't running on US state streak mode.
-     * Support coming soon!
-     */
     if (game.mode === 'standard') {
         return;
     }
@@ -14,14 +10,16 @@
     const is_country_streak = game.map === 'country-streak';
     const canvas_elem = document.querySelector('div.game-layout__canvas');
     
-    function create_flag(country_code) {
+    function create_flag(country_code, coords) {
         const flag_elem = document.createElement('div');
         
         flag_elem.innerHTML = `
             <div class="streak-result-list__flag-circle" 
                 style="margin: 0; margin-right: 0.5em; width: 1.25rem; height: 1.25rem; box-shadow: 1px 2px 5px lightgrey;">
-                <img src="/static/${is_country_streak ? 'flags' : 'us-states'}/${country_code.toUpperCase()}.svg"
+                <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=${coords.lat},${coords.lng}">
+                    <img src="/static/${is_country_streak ? 'flags' : 'us-states'}/${country_code.toUpperCase()}.svg"
                     ${!is_country_streak ? 'class="us-state" style="padding: 0.1rem;"': ''}>
+                </a>
             </div>
         `.trim();
 
@@ -44,7 +42,11 @@
          */
         document.querySelector('div.flag-container')?.remove();
 
-        let flag_elems = game.player.guesses.map(guess => create_flag(guess.streakLocationCode).outerHTML);
+        let flag_elems = game.player.guesses.map((guess, i) => {
+            const coords = { lat: game.rounds[i].lat, lng: game.rounds[i].lng };
+            return create_flag(guess.streakLocationCode, coords).outerHTML;
+        });
+
         flag_elems = flag_elems.reverse().slice(Math.min(flag_elems.length - 2, 7));
 
         const flag_container = document.createElement('div');
