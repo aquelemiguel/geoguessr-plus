@@ -6,24 +6,54 @@
     </head>
 
     <body>
-        <img src="icons/logo.png" width="200px">
+        <header>
+            <img src="assets/icons/logo.png" width="200px">
+        </header>
+        <div class="container">
+            <div class="description">
+                A Chrome extension to enhance your Geoguessr experience.
+            </div>
+
+            <div class="settings">
+                <div class="setting-header">
+                    <h2>Settings</h2>
+                    <p>(Requires page refresh!)</p>
+                </div>
         
-        <h2>Settings</h2>
+                <input type="checkbox" class="setting-toggle" id="see-movement-settings" checked>
+                <label>See movement settings</label>
+                <br>
+        
+                <input type="checkbox" class="setting-toggle" id="track-advanced-round" checked>
+                <label>Track advanced round info</label>
+                <br>
+        
+                <input type="checkbox" class="setting-toggle" id="delete-all-ongoing" checked>
+                <label>Delete all ongoing games</label>
+                <br>
+        
+                <input type="checkbox" class="setting-toggle" id="show-streak-flags" checked>
+                <label>Show streak flags/states</label>
+            </div>
 
-        <input type="checkbox" class="setting-toggle" id="see-movement-settings" checked>
-        <label>See movement settings</label>
-        <br>
+            <div class="socials">
+                <div class="setting-header">
+                    <h2>Socials</h2>
+                </div>
 
-        <input type="checkbox" class="setting-toggle" id="track-advanced-round" checked>
-        <label>Track advanced round info</label>
-        <br>
-
-        <input type="checkbox" class="setting-toggle" id="delete-all-ongoing" checked>
-        <label>Delete all ongoing games</label>
-        <br>
-
-        <input type="checkbox" class="setting-toggle" id="show-streak-flags" checked>
-        <label>Show streak flags</label>
-        <br>
+                <div class="social-entry">
+                    <img src="./assets/icons/github.svg">
+                    <a href="https://github.com/aquelemiguel/geoguessr-plus" target="_blank">
+                        Check the source code
+                    </a>
+                </div>
+                <div class="social-entry">
+                    <img src="./assets/icons/kofi.svg">
+                    <a href="https://ko-fi.com/aquelemiguel" target="_blank">
+                        Buy me a coffee
+                    </a>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

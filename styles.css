@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'Futura Bold Italic';
+    src: url('./assets/fonts/futura-bold-italic.ttf');
+}
+
+@font-face {
+    font-family: 'Futura Book';
+    src: url('./assets/fonts/futura-book.ttf');
+}
+
+html {
+    min-width: 300px;
+}
+
+body {
+    font-family: 'Futura Book';
+    font-size: 14px;
+    margin: 0;
+}
+
+header {
+    padding: 1em;
+    box-shadow:  1px 2px 4px #d4d4d4;
+}
+
+header > img {
+    display: block;
+    margin: auto;
+}
+
+.container {
+    padding: 1.25em 2em 1em 2em;
+}
+
+.setting-header > p {
+    margin: 0;
+    color: darkgrey;
+}
+
+h2 {
+    margin: 0;
+    font-family: 'Futura Bold Italic';
+}
+
+.description {
+    margin-bottom: 1em;
+}
+
+.settings {
+    margin-bottom: 1em;
+}
+
+.setting-header {
+    margin-bottom: 1em;
+}
+
+.social-entry {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.social-entry > img {
+    width: 16px;
+    margin-right: 8px;
+}
+
+.socials a {
+    text-decoration: none;
+}
