@@ -1,7 +1,7 @@
 {
     "name": "Geoguessr Plus",
-    "description": "Enhance the Geoguessr experience!",
-    "version": "1.0",
+    "description": "A sleek Chrome extension that enhances your Geoguessr experience.",
+    "version": "1.1",
     "manifest_version": 3,
     "action": {
         "default_popup": "popup.html"
