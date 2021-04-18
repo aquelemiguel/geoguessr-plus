@@ -1,20 +1,24 @@
+function toggleSetting(name, value) {
+    let payload = {};
+    payload[name] = value;
+    chrome.storage.sync.set(payload);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    chrome.runtime.sendMessage({ action: 'get_settings' }, res => {
-        for (let elem of document.getElementsByClassName('setting-toggle')) {
-            elem.checked = res[elem.id];
-        }
-    });
+    for (let elem of document.getElementsByClassName('setting-toggle')) {
+        chrome.storage.sync.get(elem.id, res => {
+            if (Object.keys(res).length === 0) {
+                toggleSetting(elem.id, true);
+                elem.checked = true;
+            } else {
+                elem.checked = res[elem.id];
+            }
+        });
+    }
 });
 
 for (let elem of document.getElementsByClassName('setting-toggle')) {
     elem.addEventListener('change', (evt) => {
-        const message = {
-            action: elem.id,
-            value: evt.target.checked
-        }
-    
-        chrome.runtime.sendMessage(message, response => {
-            console.log(response);
-        });
+        toggleSetting(elem.id, evt.target.checked);
     });
 }

@@ -16,7 +16,7 @@
         "service_worker": "background.js"
     },
     "permissions": [
-        "webNavigation", "scripting"
+        "webNavigation", "scripting", "storage"
     ],
     "host_permissions": [
         "*://*.geoguessr.com/*"

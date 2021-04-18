@@ -60,7 +60,6 @@
         const coords = { lat: round.lat, lng: round.lng };
 
         round_elem.children[1].href = `https://www.google.com/maps/search/?api=1&query=${coords.lat},${coords.lng}`;
-        console.log(round_elem.children[1].firstChild, guess.score);
         round_elem.children[1].firstElementChild.innerHTML = guess.score;
         round_elem.children[2].innerHTML = `${guess.distance} | ${guess.time}`
     });
